@@ -7,6 +7,7 @@ import Login from "./pages/Login.jsx"
 import Dashboard from './pages/Dashboard';
 import { AuthContext } from './AuthContext';
 import RequireAuth from './components/requireAuth';
+import SectionAuth from './components/SectionAuth'
 import Profile from './pages/Profile';
 import LogButton from './LogButton.jsx';
 
@@ -18,8 +19,10 @@ function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/profile">Profile</Nav.Link>
-            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+            <SectionAuth>
+              <Nav.Link href="/profile">Profile</Nav.Link>
+              <Nav.Link href="/dashboard">Dashboard</Nav.Link>`
+            </SectionAuth>
           </Nav>
       <LogButton />
       </Container>
