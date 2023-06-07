@@ -8,7 +8,7 @@ import Dashboard from './pages/Dashboard';
 import { AuthContext } from './AuthContext';
 import RequireAuth from './components/requireAuth';
 
-function NavBar() {
+function NavBar({ logout }) {
   return (
     <Navbar bg="dark" variant='dark' expand="lg">
       <Container>
@@ -20,7 +20,7 @@ function NavBar() {
             <Nav.Link href="/profile">Profile</Nav.Link>
             <Nav.Link href="/dashboard">Dashboard</Nav.Link>
           </Nav>
-      <Button variant='outline-light'>Logout</Button>
+      <Button variant='outline-light' onClick={ logout }>Logout</Button>
       </Container>
     </Navbar>
   )
@@ -28,9 +28,13 @@ function NavBar() {
 
 function App() {
   const [token, setToken] = useLocalStorage("token", null)
+
+  function logout() {
+    setToken(null)
+  }
   return (
     <AuthContext.Provider value={{token, setToken}}>
-      <NavBar />
+      <NavBar logout={ logout }/>
 `      <BrowserRouter>
         <Routes>
           <Route element={ <Home /> } path='/home' />
