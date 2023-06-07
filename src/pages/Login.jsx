@@ -1,9 +1,23 @@
 import { Form, Button, Container } from 'react-bootstrap'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { AuthContext } from '../AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+
+    const navigate = useNavigate()
+    const authContext = useContext(AuthContext)
+
+    function login() {
+        const isCorrectUsername = username === "alfredchin2005@gmail.com"
+        const isCorrectPassword = password === "123456"
+        if (isCorrectUsername && isCorrectPassword) {
+            authContext.setToken("1234")
+            navigate("/dashboard")
+        }
+    }
 
   return (
       <Container>
@@ -18,7 +32,7 @@ export default function Login() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </Form.Group>
-                <Button variant="primary">Login</Button>
+                <Button variant="primary" onClick={login}>Login</Button>
             </Form>
       </Container>
   )
