@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import { Container, Nav, Navbar, Button } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import useLocalStorage from 'use-local-storage';
 import Home from "./pages/Home"
@@ -8,20 +8,20 @@ import Dashboard from './pages/Dashboard';
 import { AuthContext } from './AuthContext';
 import RequireAuth from './components/requireAuth';
 import Profile from './pages/Profile';
+import LogButton from './LogButton.jsx';
 
-function NavBar({ logout }) {
+function NavBar() {
   return (
     <Navbar bg="dark" variant='dark' expand="lg">
       <Container>
         <Navbar.Brand>React-Bootstrap</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Nav className="me-auto">
-            <Nav.Link href="/login">Login Page</Nav.Link>
-            <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/profile">Profile</Nav.Link>
             <Nav.Link href="/dashboard">Dashboard</Nav.Link>
           </Nav>
-      <Button variant='outline-light' onClick={ logout }>Logout</Button>
+      <LogButton />
       </Container>
     </Navbar>
   )
@@ -30,15 +30,12 @@ function NavBar({ logout }) {
 function App() {
   const [token, setToken] = useLocalStorage("token", null)
 
-  function logout() {
-    setToken(null)
-  }
   return (
     <AuthContext.Provider value={{token, setToken}}>
-      <NavBar logout={ logout }/>
+      <NavBar />
 `      <BrowserRouter>
         <Routes>
-          <Route element={ <Home /> } path='/home' />
+          <Route element={ <Home /> } path='/' />
           <Route element={ <Login /> } path='/login' />
           <Route element={
             <RequireAuth><Dashboard /></RequireAuth>
