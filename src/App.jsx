@@ -7,6 +7,7 @@ import Login from "./pages/Login.jsx"
 import Dashboard from './pages/Dashboard';
 import { AuthContext } from './AuthContext';
 import RequireAuth from './components/requireAuth';
+import Profile from './pages/Profile';
 
 function NavBar({ logout }) {
   return (
@@ -43,6 +44,11 @@ function App() {
             <RequireAuth><Dashboard /></RequireAuth>
           }
           path='/dashboard'
+          />
+          <Route element={
+            <RequireAuth><Profile /></RequireAuth>
+          }
+          path='/profile'
           />
         </Routes>
       </BrowserRouter>`
